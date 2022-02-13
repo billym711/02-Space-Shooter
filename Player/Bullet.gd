@@ -9,11 +9,12 @@ var Effects = null
 
 func _ready():
 	velocity = Vector2(0,-speed).rotated(rotation)
+	$Timer2.start()
+	$Player_Shot.play(0.0)
 
 func _physics_process(_delta):
 	velocity = move_and_slide(velocity, Vector2.ZERO)
 	position.x = wrapf(position.x, 0, Global.VP.x)
-	position.y = wrapf(position.y, 0, Global.VP.y)
 	
 
 
@@ -30,3 +31,8 @@ func _on_Area2D_body_entered(body):
 
 func _on_Timer_timeout():
 	queue_free()
+
+
+
+func _on_Timer2_timeout():
+	$Player_Shot.stop()
